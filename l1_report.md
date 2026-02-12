@@ -39,4 +39,25 @@ Using the `ip route` command, routing table inspection was introduced as an addi
 
 ## **Part 2: CTI Training with MITRE ATT&CK**
 
-*(TBD)*
+### Mapping (5 Behaviors)
+#### **Behavior 1**
+  - **Behavior**:
+    Attackers made use of multiple web shells to maintain presence on Connect Secure appliances whose security systems were compromised. These include WIREFIRE, BUSHWALK, FRAMESTING, GLASSTOKEN and LIGHTWIRE.
+  - **Mapping Process**:
+    1. **Tactic**: Persistence
+      - Objective: Maintain long lasting access to a computer system.
+    2. **Technique**: Server Software Component (T1505)
+      - Sub-Technique: SQL Stored Procedures (T1505.001), Transport Agent (T1505.002), Web Shell (T1505.003), IIS Components (T1505.004), Terminal Services DLL (T1505.005), vSphere Installation Bundles (T1505.006)
+    3. **Justification**:
+      Webshells such as WIREFIRE and LIGHTWIRE were used for robust command execution and manipulation of files. The latter utilized RC4 encryption and Base64 encoding, integrating malicious commands into legitimate workflows. The other webshell extended functionality with additional HTTP POST-basd payload delivery and decompression mechanisms. This allowed attackers to be highly evasive.
+
+#### **Behavior 2**
+  - **Behavior**:
+    Attackers targeted Ivanti Connect Secure VPNs using WARPWIRE, a credential stealer written in Javascript, which targets and steals plaintext passwords and usernames for exfiltration.
+  - **Mapping Process**:
+    1. **Tactic**: Exfiltration
+      - Objective: Steal data from victims.
+    2. **Technique**: Exfiltration Over Alternative Protocol (T1048)
+      - Sub-Technique: Exfiltration Over Symmetric Encrypted Non-C2 Protocol (T1048.001), Exfiltration Over Asymmetric Encrypted Non-C2 Protocol (T1048.002), Exfiltration Over Unencrypted Non-C2 Protocol (T1048.003)
+    3. **Justification**:
+      The Cutting Edge APT Campaign made use of malware such as WARPWIRE, a specialized JavaScript-based credential harvester. The software embeds itself into ICS web interfaces and intercepts and steals plaintext credentials through Base64-encoded HTTP GET requests.
